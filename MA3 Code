@@ -9,7 +9,7 @@ int quesans(string question, string choices[], char correctanswer) {
     }
 
     char playerAnswer;
-    cout << "Enter Player's answer: ";
+    cout << "Enter answer: ";
     cin >> playerAnswer;
     playerAnswer = toupper(playerAnswer);
 
@@ -23,7 +23,6 @@ int quesans(string question, string choices[], char correctanswer) {
 }
 
 void hardQuiz() {
-    cout << "Welcome to Quizbee\n";
     int start;
     cout << "Hard Difficulty" << endl;
     cout << "Enter '1' to Start: ";
@@ -96,7 +95,6 @@ void hardQuiz() {
 }
 
 void midiumQuiz() {
-    cout << "Welcome to Quizbee\n";
     int start;
     cout << "Midium Difficulty" << endl;
     cout << "Enter '1' to Start: ";
@@ -235,7 +233,7 @@ void easyQuiz(){
             cin>>midiumLevel;
 
         if(midiumLevel == 'Y'){
-            cout<<"Congratulations you have reach Midium Difficulty";
+            cout<<"Congratulations you have reach Midium Difficulty\n";
             midiumQuiz();
             }
         }
