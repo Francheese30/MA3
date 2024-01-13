@@ -39,26 +39,22 @@ int quesans(const mQuestion &question) {
 
     if (question.isTrueFalse) {
         if ((strcmp(playerAnswer, "TRUE") == 0 || strcmp(playerAnswer, "T") == 0) && question.correctAnswer == 'T') {
-            cout << "Correct!\n";
             return 1;
         } else if ((strcmp(playerAnswer, "FALSE") == 0 || strcmp(playerAnswer, "F") == 0) && question.correctAnswer == 'F') {
-            cout << "Correct!\n";
             return 1;
         } else {
-            cout << "Incorrect. The correct answer is: " << (question.correctAnswer == 'T' ? "True" : "False") << endl;
+            return 0;
         }
     } else if (!question.identificationAnswer.empty()) {
         if (strcmp(playerAnswer, question.identificationAnswer.c_str()) == 0) {
-            cout << "Correct!\n";
             return 1;
         } else {
-            cout << "Incorrect. The correct answer is: " << question.identificationAnswer << endl;
+            return 0;
         }
     } else if (playerAnswer[0] == question.correctAnswer) {
-        cout << "Correct!\n";
         return 1;
     } else {
-        cout << "Incorrect. The correct answer is: " << question.correctAnswer << endl;
+        return 0;
     }
 
     return 0;
