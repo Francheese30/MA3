@@ -1,0 +1,443 @@
+#include <iostream>
+#include <cctype>
+#include <cstring>
+using namespace std;
+
+struct Question {
+    string question;
+    string choices[4];
+    char correctAnswer;
+    bool isTrueFalse;
+    string identificationAnswer;
+};
+
+int quesans(const Question &question) {
+    cout << question.question << endl;
+
+    if (question.isTrueFalse) {
+        cout << "True or False? ";
+    } else if (!question.identificationAnswer.empty()) {
+        cout << "Enter your answer: ";
+    } else {
+        for (int i = 0; i < 4; ++i) {
+            cout << static_cast<char>('A' + i) << ". " << question.choices[i] << endl;
+        }
+        cout << "Enter answer: ";
+    }
+
+    char playerAnswer[30];
+    if (question.isTrueFalse || !question.identificationAnswer.empty()) {
+        cin.ignore();
+        cin.getline(playerAnswer, sizeof(playerAnswer));
+        for (char &c : playerAnswer) {
+            c = toupper(c);
+        }
+    } else {
+        cin >> playerAnswer;
+        playerAnswer[0] = toupper(playerAnswer[0]);
+    }
+
+    if (question.isTrueFalse) {
+        if ((strcmp(playerAnswer, "TRUE") == 0 || strcmp(playerAnswer, "T") == 0) && question.correctAnswer == 'T') {
+            cout<<"Correct";
+            return 1;
+        } else if ((strcmp(playerAnswer, "FALSE") == 0 || strcmp(playerAnswer, "F") == 0) && question.correctAnswer == 'F') {
+            cout<<"Correct";
+            return 1;
+        } else {
+            cout<<"Wrong";
+            return 0;
+        }
+    } else if (!question.identificationAnswer.empty()) {
+        if (strcmp(playerAnswer, question.identificationAnswer.c_str()) == 0) {
+            cout<<"Correct";
+            return 1;
+        } else {
+            cout<<"Wrong";
+            return 0;
+        }
+    } else if (playerAnswer[0] == question.correctAnswer) {
+        cout<<"Correct";
+        return 1;
+    } else {
+        cout<<"Wrong";
+        return 0;
+    }
+
+    return 0;
+}
+void welcome() {
+    cout << "    _       __     __\n";
+    cout << "   | |     / /__  / /________  ____ ___  ___\n";
+    cout << "   | | /| / / _ \\/ / ___/ __ \\/ __ `__ \\/ _ \\\n";
+    cout << "   | |/ |/ /  __/ / /__/ /_/ / / / / / /  __/\n";
+    cout << "   |__/|__/\\___/_/\\___/\\____/_/ /_/ /_/\\___/\n";
+    cout << "                     ______\n";
+    cout << "                    /_  __/___\n";
+    cout << "                     / / / __ \\\n";
+    cout << "                    / / / /_/ /\n";
+    cout << "                   /_/  \\____/\n";
+    cout << "       ____             _          __ __                     __         __\n";
+    cout << "      / __ )_________ _(_)___     / //_/____  ____ _      __/ /__  ____/ /___ ____\n";
+    cout << "     / __  / ___/ __ `/ / __ \\   / ,<  / __ \\/ __ \\ | /| / / / _ \\/ __  / __ `/ _ \\\n";
+    cout << "    / /_/ / /  / /_/ / / / / /  / /| |/ / / / /_/ / |/ |/ / /  __/ /_/ / /_/ /  __/\n";
+    cout << "   /_____/_/   \\__,_/_/_/ /_/  /_/ |_/_/ /_/\\____/|__/|__/_/\\___/\\__,_/\\__, /\\___/\n";
+    cout << "                                                                      /____/\n";
+    cout << "               ____                  __\n";
+    cout << "               / __ \\__  _____  _____/ /_\n";
+    cout << "              / / / / / / / _ \\/ ___/ __/\n";
+    cout << "             / /_/ / /_/ /  __(__  ) /_\n";
+    cout << "             \\___\\_\\__,_/\\___/____/\\__/\n\n\n\n";
+}
+void clitcherQuiz() {
+    int start;
+    cout << "    ______      __               ___   __                __             __\n";
+    cout << "   / ____/___  / /____  _____   <  /  / /_____     _____/ /_____ ______/ /_ \n";
+    cout << "  / __/ / __ \\/ __/ _ \\/ ___/   / /  / __/ __ \\   / ___/ __/ __ `/ ___/ __/\n";
+    cout << " / /___/ / / / /_/  __/ /      / /  / /_/ /_/ /  (__  ) /_/ /_/ / /  / /_\n";
+    cout << "/_____/_/ /_/\\__/\\___/_/      /_/   \\__/\\____/  /____/\\__/\\__,_/_/   \\__/\n\n\n";
+    cout << "Enter Here: ";
+    cin >> start;
+
+    if (start == 1) {
+
+        cout << "_________   .__  .__  __         .__                  \n";
+        cout << "\\_   ___ \\  |  | |__|/  |_  ____ |  |__   ___________  \n";
+        cout << "/    \\  \\/  |  | |  \\   __\\/ ___\\|  |  \\_/ __ \\_  __ \\ \n";
+        cout << "\\     \\____ |  |_|  ||  | \\  \\___|   Y  \\  ___/|  | \\/ \n";
+        cout << " \\______  / |____/__||__|  \\___  >___|  /\\___  >__|   \n";
+        cout << "        \\/                     \\/     \\/     \\/       \n\n\n";
+        
+        const int numQuestion = 5;
+        float passed = numQuestion * 0.8;
+
+        Question questions[numQuestion] = {
+            {"What is the average of 12, 24, 36, 48, and 60?", {"60", "36", "54", "32"}, 'B', false, ""},
+            {"What are the names of the five oceans?", {"Atlantic Ocean, Dead Sea Ocean, Pacific Ocean and Arctic Ocean", "Atlantic Ocean, Pacific Ocean, Southern Ocean, Arctic Ocean, Indian Ocean", "Atlantic Ocean, Pacific Ocean, Northern Ocean, Antarctic Ocean and Indian Ocean", "Atlantic Ocean, Pacific Ocean, Indian Ocean, Arctic Ocean, and the Antarctic Ocean"}, 'D', false, ""},
+            {"When you leave wine exposed to the air, the ethanol in it reacts with oxygen to form what?", {"Ethanoic Acid", "Ethyl Acetate", "Ethanoic Acetate", "Ethyl Acid"}, 'A', false, ""},
+            {"How long does it take for the caffeine in coffee to fully kick in?", {"20 minutes", "30 minutes", "45 minutes", "1 hour"}, 'A', false, ""},
+            {"How many seconds are there in a day?", {"86400", "87600", "90000", "82400"}, 'A', false, ""},
+        };
+
+        int scores[2] = {0};
+
+        for (int player = 1; player <= 2; ++player) {
+            cout << "\nPlayer " << player << "'s turn:" << endl;
+
+            for (int player = 1; player <= 2; ++player) {
+            cout << "\nPlayer " << player << "'s turn:" << endl;
+
+            for (int i = 0; i < numQuestion; ++i) {
+                int result = quesans(questions[i]);
+                if (result == 1) {
+                    scores[player - 1]++;
+                }
+                cout << endl;
+            }
+        }
+
+        cout << "Clitcher completed! Results:" << endl;
+        cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
+        cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
+
+        if (scores[0] > scores[1]) {
+            cout << "Player 1 Wins";
+        } 
+        
+        else if (scores[0] < scores[1]) {
+            cout << "Player 2 Wins";
+        } 
+        
+        else if (scores[0] == scores[1]) {
+            cout << "It's a tie";
+        }
+        }
+    }
+}
+
+void scienceQuiz() {
+    int start;
+    cout << "    ______      __               ___   __                __             __\n";
+    cout << "   / ____/___  / /____  _____   <  /  / /_____     _____/ /_____ ______/ /_ \n";
+    cout << "  / __/ / __ \\/ __/ _ \\/ ___/   / /  / __/ __ \\   / ___/ __/ __ `/ ___/ __/\n";
+    cout << " / /___/ / / / /_/  __/ /      / /  / /_/ /_/ /  (__  ) /_/ /_/ / /  / /_\n";
+    cout << "/_____/_/ /_/\\__/\\___/_/      /_/   \\__/\\____/  /____/\\__/\\__,_/_/   \\__/\n\n\n";
+    cout << "Enter Here: ";
+    cin >> start;
+
+    if (start == 1) {
+
+        cout << "   _____      _                         ____        _    \n";
+        cout << "  / ___/_____(_)__  ____  ________     / __ \\__  __(_)___\n";
+        cout << "  \\__ \\/ ___/ / _ \\/ __ \\/ ___/ _ \\   / / / / / / / /_  /\n";
+        cout << " ___/ / /__/ /  __/ / / / /__/  __/  / /_/ / /_/ / / / /_\n";
+        cout << "/____/\\___/_/\\___/_/ /_/\\___/\\___/  \\__\\_\\__,_/_/ /___/\n\n\n";
+        
+        const int numQuestion = 25;
+        float passed = numQuestion * 0.8;
+
+        Question questions[numQuestion] = {
+            {"Animals that produce milk through their mammary glands are called?", {"Reptiles", "Birds", "Amphibians", "Mammals"}, 'D', false, ""},
+            {"What gas is used during the Calvin cycle in order to complete the reaction?", {"Hydrogen", "Carbon monoxide", "Carbon dioxide", "Oxygen"}, 'C', false, ""},
+            {"Who was the Famous scientist that got knighted for their great contributions to science?", {"Isaac Newton", "Thomas Alva Edison", "Albert Einstein", "Stephen Hawking"}, 'A', false, ""},
+            {"What elements are the most common in the human body? The human body is made of various elements", {"Sulfur, sodium, magnesium", "Phosphorus, nitrogen, calcium", "Copper, zinc, selenium", "Oxygen, carbon, hydrogen"}, 'D', false, ""},
+            {"Which of the following is NOT a form of carbon?", {"Diamond", "Graphite", "Amorphous carbon", "Ferrite"}, 'D', false, ""},
+            {"Which of the following is an example of a vector quantity?", {"Temperature", "Velocity", "Mass", "Time"}, 'B', false, ""},
+            {"Newton's Laws of motion states that every action has an equal and opposite reaction.", {"Newtons First Law", "Newtons Second Law", "Newtons Third Law", "None of the Above"}, 'C', false, ""},
+            {"Which of the following is a unit current?", {"Volt", "Ampere", "Watt", "Ohm"}, 'B', false, ""},
+            {"What type of energy is associated with an object in motion?", {"Potential energy", "Thermal energy", "Kinetic energy", "Electrical energy"}, 'C', false, ""},
+            {"What is the property of matter that causes it to resist changes in motion or rest?", {"Velocity", "Acceleration", "Inertia", "Friction"}, 'C', false, ""},
+
+            {"7 is the pH value of a neutral solution?", {}, 'T', true, ""},
+            {"Tin forms an amalgam with other metals?", {}, 'F', true, ""},
+            {"Titanium has the highest melting point.", {}, 'F', true, ""},
+            {"74 degrees Fahrenheit does a room temperature have?", {}, 'F', true, ""},
+            {"Breaking down rocks and minerals into smaller particles is called Weathering", {}, 'T', true, ""},
+            {"The human body is about 60% water.", {}, 'T', true, ""},
+            {"Taste buds can only be found on the tongue.", {}, 'T', true, ""},
+            {"Bamboo is a kind of grass.", {}, 'T', true, ""},
+            {"The Liver is the lightest organ of the body.", {}, 'F', true, ""},
+            {"Venus is the only planet that spins clockwise.", {}, 'T', true, ""},
+
+            {"What is the largest known type of galaxy?", {}, ' ', false, "CONDOR GALAXY"},
+            {"Which of the following is used in pencils?", {}, ' ', false, "GRAPHITE"},
+            {"The gas usually filled in the electric bulb is?", {}, ' ', false, "NITROGEN"},
+            {"The inert gas which is substituted for nitrogen in the air used by deep sea divers for breathing, is?", {}, ' ', false, "HELIUM"},
+            {"Which of the following is responsible for carrying oxygen in our blood?", {}, ' ', false, "HEMOGLOBIN"},
+        };
+
+        int scores[2] = {0};
+
+        for (int player = 1; player <= 2; ++player) {
+            cout << "\nPlayer " << player << "'s turn:" << endl;
+
+            for (int i = 0; i < numQuestion; ++i) {
+                int result = quesans(questions[i]);
+                if (result == 1) {
+                    scores[player - 1]++;
+                }
+                cout << endl;
+            }
+        }
+
+        cout << "Science Quiz completed! Results:" << endl;
+        cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
+        cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
+
+        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
+            cout<<"Player 1 Wins";
+        }
+
+        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
+            cout<<"Player 2 Wins";
+        }
+
+        else if(scores[0] < passed && scores[1] < passed){
+            cout<<"both players didn't meet the required score to proceed to next level";
+        }
+
+        else if(scores[0] >= passed && scores[1] >= passed){
+            char nextLevel;
+            cout<<"Do you want to proceed to next level? [Y/N]: ";
+            cin>>nextLevel;
+
+        if(nextLevel == 'Y'){
+            cout<<"Congratulations, You will now move on Clitcher\n";
+            }
+        }
+    }
+}
+
+void geologyQuiz() {
+    int start;
+    cout << "    ______      __               ___   __                __             __\n";
+    cout << "   / ____/___  / /____  _____   <  /  / /_____     _____/ /_____ ______/ /_ \n";
+    cout << "  / __/ / __ \\/ __/ _ \\/ ___/   / /  / __/ __ \\   / ___/ __/ __ `/ ___/ __/\n";
+    cout << " / /___/ / / / /_/  __/ /      / /  / /_/ /_/ /  (__  ) /_/ /_/ / /  / /_\n";
+    cout << "/_____/_/ /_/\\__/\\___/_/      /_/   \\__/\\____/  /____/\\__/\\__,_/_/   \\__/\n\n\n";
+    cout << "Enter Here: ";
+    cin >> start;
+
+    if (start == 1) {
+
+        cout << "   ______           __                     ____        _    \n";
+        cout << "  / ____/__  ____  / /___  ____ ___  __   / __ \\__  __(_)___\n";
+        cout << " / / __/ _ \\/ __ \\/ / __ \\/ __ `/ / / /  / / / / / / / /_  /\n";
+        cout << "/ /_/ /  __/ /_/ / / /_/ / /_/ / /_/ /  / /_/ / /_/ / / / /_\n";
+        cout << "\\____/\\___/\\____/_/\\____/\\__, /\\__, /   \\___\\_\\__,_/_/ /___/\n\n\n";
+        
+        const int numQuestion = 25;
+        float passed = numQuestion * 0.8;
+
+        Question questions[numQuestion] = {
+            {"What country is known as Asia's pearl of the orient", {"Japan", "Vietnam", "Phillippines", "Thailand"}, 'C', false, ""},
+            {"Which continent is known as the Land Down Under?", {"North America", "Europe", "Australia", "Asia"}, 'C', false, ""},
+            {"The Amazon River is located on which continent?", {"South America", "Africa", "North America", "Asia"}, 'A', false, ""},
+            {"Mount Everest, the highest peak in the world, is part of which mountain range?", {"Alps", "Andes", "Himalayas", "Rockies"}, 'C', false, ""},
+            {"Which ocean is the largest by both area and volume?", {"Atlantic Ocean", "Indian Ocean", "Southern Ocean", "Pacific Ocean"}, 'D', false, ""},
+            {"In which country would you find the Great Barrier Reef?", {"Brazil", "Australia", "Mexico", "Egypt"}, 'B', false, ""},
+            {"The Sahara Desert is located in which continent?", {"Asia", "Africa", "South America", "North America"}, 'B', false, ""},
+            {"Which river is the longest in the world?", {"Amazon River", "Nile River", "Yangtze River", "Mississippi River"}, 'B', false, ""},
+            {"The city of Istanbul is located on two continents. Which continents are they?", {"Europe and Asia", "Africa and Europe", "Asia and Africa", "North America and Europe"}, 'A', false, ""},
+            {"What is the captial city of Japan?", {"Seoul", "Beijing", "Tokyo", "Bangkok"}, 'C', false, ""},
+            
+            
+            {"Congo River is the longest river in Africa?", {}, 'F', true, ""},
+            {"Ottawa is the capital city of Canada?", {}, 'T', true, ""},
+            {"The mountain range of Carpathians separates Europe from Asia?", {}, 'T', true, ""},
+            {"The city of Rio de Janeiro is located in Brazil?", {}, 'T', true, ""},
+            {"South Korea is known as the Land of the Rising Sun?", {}, 'F', true, ""},
+            {"South America has more nations than Africa has.", {}, 'F', true, ""},
+            {"The Mississippi and the Nile are the two longest rivers in the world.", {}, 'F', true, ""},
+            {"About 36 and 42 islands make up New York City.", {}, 'T', true, ""},
+            {"The worlds largest island is Greenland.", {}, 'T', true, ""},
+            {"13,171 miles is how far the Great Wall of China stretches in total.", {}, 'F', true, ""},
+            
+            {"Which country is both the smallest in terms of area and population?", {}, ' ', false, "VATICAN CITY"},
+            {"The Great Wall of China was built to protect against invasions from which group of people?", {}, ' ', false, "MONGOLS"},
+            {"An Italian city that is also known as the City of Canals?", {}, ' ', false, "VENICE"},
+            {"What is the largest desert in the world by area?", {}, ' ', false, "ANTARTIC DESERT"},
+            {"Lake Baikal, the deepest freshwater lake in the world, is located in which country?", {}, ' ', false, "RUSSIA"},
+        };
+
+        int scores[2] = {0};
+
+        for (int player = 1; player <= 2; ++player) {
+            cout << "\nPlayer " << player << "'s turn:" << endl;
+
+            for (int i = 0; i < numQuestion; ++i) {
+                int result = quesans(questions[i]);
+                if (result == 1) {
+                    scores[player - 1]++;
+                }
+                cout << endl;
+            }
+        }
+
+        cout << "Geology Quiz completed! Results:" << endl;
+        cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
+        cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
+
+        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
+            cout<<"Player 1 Wins";
+        }
+
+        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
+            cout<<"Player 2 Wins";
+        }
+
+        else if(scores[0] < passed && scores[1] < passed){
+            cout<<"both players didn't meet the required score to proceed to next level";
+        }
+
+        else if(scores[0] >= passed && scores[1] >= passed){
+            char nextLevel;
+            cout<<"Do you want to proceed to next level? [Y/N]: ";
+            cin>>nextLevel;
+
+        if(nextLevel == 'Y'){
+            cout<<"Congratulations, Next Quiz is Science.\n";
+            scienceQuiz();
+            }
+        }
+    }
+}
+
+void mathQuiz() {
+    int start;
+    cout << "    ______      __               ___   __                __             __\n";
+    cout << "   / ____/___  / /____  _____   <  /  / /_____     _____/ /_____ ______/ /_ \n";
+    cout << "  / __/ / __ \\/ __/ _ \\/ ___/   / /  / __/ __ \\   / ___/ __/ __ `/ ___/ __/\n";
+    cout << " / /___/ / / / /_/  __/ /      / /  / /_/ /_/ /  (__  ) /_/ /_/ / /  / /_\n";
+    cout << "/_____/_/ /_/\\__/\\___/_/      /_/   \\__/\\____/  /____/\\__/\\__,_/_/   \\__/\n\n\n";
+    cout << "Enter Here: ";
+    cin >> start;
+
+    if (start == 1) {
+
+        cout << "    __  ___      __  __       ____        _    \n";
+        cout << "   /  |/  /___ _/ /_/ /_     / __ \\__  __(_)___\n";
+        cout << "  / /|_/ / __ `/ __/ __ \\   / / / / / / / /_  /\n";
+        cout << " / /  / / /_/ / /_/ / / /  / /_/ / /_/ / / / /_\n";
+        cout << "/_/  /_/\\__,_/\\__/_/ /_/   \\___\\_\\__,_/_/ /___/\n\n\n";
+
+        const int numQuestion = 25;
+        float passed = numQuestion * 0.8;
+
+        Question questions[numQuestion] = {
+            {"What symbol is used to symbolize percentage?", {"+", "-", "%", "/"}, 'C', false, ""},
+            {"What is the half of one written as a fraction?", {"1/4", "1/2", "1/6", "1/8"}, 'B', false, ""},
+            {"If the time is 12 pm, how many hours until 6 am?", {"6 hours", "8 hours", "10 hours", "12 hours"}, 'D', false, ""},
+            {"How many hours are there in a week?", {"100 hrs", "250 hrs", "168 hrs", "69 hours"}, 'C', false, ""},
+            {"What is the least common denominator of 8 and 12?", {"18", "24", "16", "22"}, 'B', false, ""},
+            {"What is half of one half?", {"1/6", "1/4", "1/3", "1/2"}, 'D', false, ""},
+            {"What is the sum of 19-21?", {"-3", "3", "-4", "4"}, 'A', false, ""},
+            {"What is the equivalent of 75 percent in fraction?", {"3/8", "3/4", "5/6", "1/2"}, 'B', false, ""},
+            {"What number is considered as a special number?", {"1", "8", "7", "2"}, 'A', false, ""},
+            {"Is 31 a prime number?", {"No", "Maybe", "Yes", "None of the above"}, 'C', false, ""},
+            
+            {"The five decimal places of Pi is 3.14156", {}, 'F', true, ""},
+            {"The cube root of 1331 is 11", {}, 'T', true, ""},
+            {"When 5.23 and 8.79 are added together, the sum is 14.02", {}, 'F', true, ""},
+            {"The 2nd prime number is 3 if 1 is not included", {}, 'T', true, ""},
+            {"The number between 23 and 27 is 25", {}, 'T', true, ""},
+            {"Two lines with positive slopes can be perpendicular", {}, 'F', true, ""},
+            {"The set of ordered pairs {(6,4),(2,-5),(-2,4),(6,-4)} is a function.", {}, 'F', true, ""},
+            {"The additive inverse of -10 is 10.", {}, 'T', true, ""},
+            {"100 miles/hour is faster than 100 km/hour.", {}, 'T', true, ""},
+            {"If the surface area of two cylinders is the same, then the cylinders have the same volume.", {}, 'T', true, ""},
+            
+            {"Find the Missing Term in Multiples of 6 : 6, 12, 18, 24, _, 36, 42, 48.", {"25", "30", "35", "40"}, ' ', false, "30"},
+            {"What is the square root of 1?", {"1", "0", "-1", "2"}, ' ', false, "1"},
+            {"How Many Months Make a Century?", {"100", "1200", "120", "10"}, ' ', false, "1200"},
+            {"What is the square root of 576?", {"24", "26", "28", "30"}, ' ', false, "24"},
+            {"What is the square root of 144?", {"12", "10", "14", "16"}, ' ', false, "12"},
+        };
+
+        int scores[2] = {0};
+
+        for (int player = 1; player <= 2; ++player) {
+            cout << "\nPlayer " << player << "'s turn:" << endl;
+
+            for (int i = 0; i < numQuestion; ++i) {
+                int result = quesans(questions[i]);
+                if (result == 1) {
+                    scores[player - 1]++;
+                }
+                cout << endl;
+            }
+        }
+
+        cout << "Math Quiz completed! Results:" << endl;
+        cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
+        cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
+
+        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
+            cout<<"Player 1 Wins";
+        }
+
+        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
+            cout<<"Player 2 Wins";
+        }
+
+        else if(scores[0] < passed && scores[1] < passed){
+            cout<<"both players didn't meet the required score to proceed to next level";
+        }
+
+        else if(scores[0] >= passed && scores[1] >= passed){
+            char nextLevel;
+            cout<<"Do you want to proceed to next quiz? [Y/N]: ";
+            cin>>nextLevel;
+
+        if(nextLevel == 'Y'){
+            cout<<"Congratulations, Next Quiz is Geology.\n";
+            geologyQuiz();
+            }
+        }
+    }
+}
+int main() {
+    welcome();
+    mathQuiz();
+    return 0;
+}
