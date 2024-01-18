@@ -39,28 +39,22 @@ int quesans(const Question &question) {
 
     if (question.isTrueFalse) {
         if ((strcmp(playerAnswer, "TRUE") == 0 || strcmp(playerAnswer, "T") == 0) && question.correctAnswer == 'T') {
-            cout<<"Correct";
             return 1;
         } else if ((strcmp(playerAnswer, "FALSE") == 0 || strcmp(playerAnswer, "F") == 0) && question.correctAnswer == 'F') {
-            cout<<"Correct";
             return 1;
         } else {
-            cout<<"Wrong";
             return 0;
         }
     } else if (!question.identificationAnswer.empty()) {
         if (strcmp(playerAnswer, question.identificationAnswer.c_str()) == 0) {
-            cout<<"Correct";
+            cout << "Correct!";
             return 1;
         } else {
-            cout<<"Wrong";
             return 0;
         }
     } else if (playerAnswer[0] == question.correctAnswer) {
-        cout<<"Correct";
         return 1;
     } else {
-        cout<<"Wrong";
         return 0;
     }
 
@@ -224,16 +218,16 @@ void scienceQuiz() {
         cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
         cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
 
-        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
+        if(scores[0] > scores [1]){
             cout<<"Player 1 Wins";
         }
 
-        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
+        else if(scores[0] < scores [1]){
             cout<<"Player 2 Wins";
         }
 
         else if(scores[0] < passed && scores[1] < passed){
-            cout<<"both players didn't meet the required score to proceed to next level";
+            cout<<"both players didn't meet the required score to proceed to next subject!"<<endl;
         }
 
         else if(scores[0] >= passed && scores[1] >= passed){
@@ -248,7 +242,7 @@ void scienceQuiz() {
     }
 }
 
-void geologyQuiz() {
+void geographyQuiz() {
     int start;
     cout << "    ______      __               ___   __                __             __\n";
     cout << "   / ____/___  / /____  _____   <  /  / /_____     _____/ /_____ ______/ /_ \n";
@@ -260,11 +254,12 @@ void geologyQuiz() {
 
     if (start == 1) {
 
-        cout << "   ______           __                     ____        _    \n";
-        cout << "  / ____/__  ____  / /___  ____ ___  __   / __ \\__  __(_)___\n";
-        cout << " / / __/ _ \\/ __ \\/ / __ \\/ __ `/ / / /  / / / / / / / /_  /\n";
-        cout << "/ /_/ /  __/ /_/ / / /_/ / /_/ / /_/ /  / /_/ / /_/ / / / /_\n";
-        cout << "\\____/\\___/\\____/_/\\____/\\__, /\\__, /   \\___\\_\\__,_/_/ /___/\n\n\n";
+        cout << "   ______                                  __         \n";
+        cout << "  / ____/__  ____  ____ __________ _____  / /_  __  __\n";
+        cout << " / / __/ _ \\/ __ \\/ __ `/ ___/ __ `/ __ \\/ __ \\/ / / /\n";
+        cout << "/ /_/ /  __/ /_/ / /_/ / /  / /_/ / /_/ / / / / /_/ / \n";
+        cout << "\\____/\\___/\\____/\\__, /_/   \\__,_/ .___/_/ /_/\\__, /  \n";
+        cout << "                /____/          /_/          /____/   \n\n\n";
         
         const int numQuestion = 25;
         float passed = numQuestion * 0.8;
@@ -318,16 +313,16 @@ void geologyQuiz() {
         cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
         cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
 
-        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
+        if(scores[0] > scores [1]){
             cout<<"Player 1 Wins";
         }
 
-        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
+        else if(scores[0] < scores [1]){
             cout<<"Player 2 Wins";
         }
 
         else if(scores[0] < passed && scores[1] < passed){
-            cout<<"both players didn't meet the required score to proceed to next level";
+            cout<<"both players didn't meet the required score to proceed to next subject!"<<endl;
         }
 
         else if(scores[0] >= passed && scores[1] >= passed){
@@ -412,16 +407,16 @@ void mathQuiz() {
         cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
         cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
 
-        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
+        if(scores[0] > scores [1]){
             cout<<"Player 1 Wins";
         }
 
-        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
+        else if(scores[0] < scores [1]){
             cout<<"Player 2 Wins";
         }
 
         else if(scores[0] < passed && scores[1] < passed){
-            cout<<"both players didn't meet the required score to proceed to next level";
+            cout<<"both players didn't meet the required score to proceed to next subject!"<<endl;
         }
 
         else if(scores[0] >= passed && scores[1] >= passed){
@@ -431,7 +426,7 @@ void mathQuiz() {
 
         if(nextLevel == 'Y'){
             cout<<"Congratulations, Next Quiz is Geology.\n";
-            geologyQuiz();
+            geographyQuiz();
             }
         }
     }
