@@ -361,7 +361,7 @@ void mathQuiz() {
         float passed = numQuestion * 0.8;
 
         Question questions[numQuestion] = {
-            {"What symbol is used to symbolize percentage?", {"+", "-", "%", "/"}, ' ', , ""},
+            {"What symbol is used to symbolize percentage?", {"+", "-", "%", "/"}, 'C', false , ""},
             {"What is the half of one written as a fraction?", {"1/4", "1/2", "1/6", "1/8"}, 'B', false, ""},
             {"If the time is 12 pm, how many hours until 6 am?", {"6 hours", "8 hours", "10 hours", "12 hours"}, 'D', false, ""},
             {"How many hours are there in a week?", {"100 hrs", "250 hrs", "168 hrs", "69 hours"}, 'C', false, ""},
