@@ -218,25 +218,26 @@ void scienceQuiz() {
         cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
         cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
 
-        if(scores[0] > scores [1]){
+        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
             cout<<"Player 1 Wins";
         }
 
-        else if(scores[0] < scores [1]){
+        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
             cout<<"Player 2 Wins";
         }
 
         else if(scores[0] < passed && scores[1] < passed){
-            cout<<"both players didn't meet the required score to proceed to next subject!"<<endl;
+            cout<<"both players didn't meet the required score to proceed to next level";
         }
 
         else if(scores[0] >= passed && scores[1] >= passed){
             char nextLevel;
-            cout<<"Do you want to proceed to next level? [Y/N]: ";
+            cout<<"Do you want to proceed to next quiz? [Y/N]: ";
             cin>>nextLevel;
 
         if(nextLevel == 'Y'){
-            cout<<"Congratulations, You will now move on Clitcher\n";
+            cout<<"Congratulations, Next Quiz is Geology.\n";
+            clitcherQuiz();
             }
         }
     }
@@ -313,21 +314,21 @@ void geographyQuiz() {
         cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
         cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
 
-        if(scores[0] > scores [1]){
+        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
             cout<<"Player 1 Wins";
         }
 
-        else if(scores[0] < scores [1]){
+        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
             cout<<"Player 2 Wins";
         }
 
         else if(scores[0] < passed && scores[1] < passed){
-            cout<<"both players didn't meet the required score to proceed to next subject!"<<endl;
+            cout<<"both players didn't meet the required score to proceed to next level";
         }
 
         else if(scores[0] >= passed && scores[1] >= passed){
             char nextLevel;
-            cout<<"Do you want to proceed to next level? [Y/N]: ";
+            cout<<"Do you want to proceed to next quiz? [Y/N]: ";
             cin>>nextLevel;
 
         if(nextLevel == 'Y'){
@@ -360,7 +361,7 @@ void mathQuiz() {
         float passed = numQuestion * 0.8;
 
         Question questions[numQuestion] = {
-            {"What symbol is used to symbolize percentage?", {"+", "-", "%", "/"}, 'C', false, ""},
+            {"What symbol is used to symbolize percentage?", {"+", "-", "%", "/"}, ' ', , ""},
             {"What is the half of one written as a fraction?", {"1/4", "1/2", "1/6", "1/8"}, 'B', false, ""},
             {"If the time is 12 pm, how many hours until 6 am?", {"6 hours", "8 hours", "10 hours", "12 hours"}, 'D', false, ""},
             {"How many hours are there in a week?", {"100 hrs", "250 hrs", "168 hrs", "69 hours"}, 'C', false, ""},
@@ -407,16 +408,16 @@ void mathQuiz() {
         cout << "Player 1's score: " << scores[0] << "/" << numQuestion << endl;
         cout << "Player 2's score: " << scores[1] << "/" << numQuestion << endl;
 
-        if(scores[0] > scores [1]){
+        if(scores[0] > scores [1] && scores[0] < passed && scores [1] <passed){
             cout<<"Player 1 Wins";
         }
 
-        else if(scores[0] < scores [1]){
+        else if(scores[0] < scores [1] && scores[0] < passed && scores [1] <passed){
             cout<<"Player 2 Wins";
         }
 
         else if(scores[0] < passed && scores[1] < passed){
-            cout<<"both players didn't meet the required score to proceed to next subject!"<<endl;
+            cout<<"both players didn't meet the required score to proceed to next level";
         }
 
         else if(scores[0] >= passed && scores[1] >= passed){
@@ -425,7 +426,7 @@ void mathQuiz() {
             cin>>nextLevel;
 
         if(nextLevel == 'Y'){
-            cout<<"Congratulations, Next Quiz is Geology.\n";
+            cout<<"Congratulations, Next Quiz is Geography.\n";
             geographyQuiz();
             }
         }
